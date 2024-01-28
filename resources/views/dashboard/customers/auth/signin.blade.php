@@ -27,30 +27,35 @@
     </div>
     <div class="registration form">
       <header>Signup</header>
-      <form method="post" action="{{ route('customer.signup') }}">
-          @csrf
+          <form method="post" action="{{ route('customer.signup') }}" enctype="multipart/form-data">
+        @csrf
 
-          <label for="name">Enter your name:</label>
-          <input name="name" type="text" placeholder="Enter your name" required>
-          @error('name')
-              <span class="error">{{ $message }}</span>
-          @enderror
+        <label for="name">Enter your name:</label>
+        <input name="name" type="text" placeholder="Enter your name" required>
+        @error('name')
+            <span class="error">{{ $message }}</span>
+        @enderror
 
-          <label for="email">Enter your email:</label>
-          <input name="email" type="email" placeholder="Enter your email" required>
-          @error('email')
-              <span class="error">{{ $message }}</span>
-          @enderror
+        <label for="email">Enter your email:</label>
+        <input name="email" type="email" placeholder="Enter your email" required>
+        @error('email')
+            <span class="error">{{ $message }}</span>
+        @enderror
 
-          <label for="password">Create a password:</label>
-          <input name="password" type="password" placeholder="Create a password" required>
-          @error('password')
-              <span class="error">{{ $message }}</span>
-          @enderror
+        <label for="password">Create a password:</label>
+        <input name="password" type="password" placeholder="Create a password" required>
+        @error('password')
+            <span class="error">{{ $message }}</span>
+        @enderror
 
-          <button class="button primary" type="submit" title="SIGN UP">SIGN UP</button>
-      </form>
+        <label for="photo">Choose a profile picture:</label>
+        <input name="photo" type="file" accept="image/*">
+        @error('photo')
+            <span class="error">{{ $message }}</span>
+        @enderror
 
+        <button class="button primary" type="submit" title="SIGN UP">SIGN UP</button>
+    </form>
       <div class="signup">
         <span class="signup">Already have an account?
          <label for="check">Login</label>

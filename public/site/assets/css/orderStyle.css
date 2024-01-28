@@ -1,0 +1,140 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+#menu {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#menu h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+#menu li:hover {
+    background-color: #f8f9fa;
+}
+
+#menu li img {
+    margin-right: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#menu .item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+#menu .item-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#menu .item-price {
+    color: #28a745;
+    font-size: 1.1em;
+}
+
+#menu .quantity-input {
+    width: 60px;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+#menu .add-to-order {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#menu .add-to-order:hover {
+    background-color: #0056b3;
+}
+
+#order-sheet {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+#order-sheet h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+#order-sheet table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#order-sheet th, #order-sheet td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+#order-sheet p {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#order-sheet #totalAmount {
+    font-weight: bold;
+    color: #dc3545;
+}
+#order-sheet {
+text-align: center;
+margin: 0 auto;
+max-width: 600px; /* تعديل العرض حسب الحاجة */
+}
+
+#order-sheet h1 {
+font-size: 2em;
+}
+#order-sheet p {
+font-size: 2em;
+}

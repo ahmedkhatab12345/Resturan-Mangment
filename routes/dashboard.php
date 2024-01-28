@@ -9,6 +9,8 @@ use App\Http\Controllers\Dashboard\CustomerController;
 use App\Http\Controllers\Dashboard\OrderController; 
 use App\Http\Controllers\Dashboard\EmployeeController; 
 use App\Http\Controllers\Dashboard\BookingController; 
+use App\Http\Controllers\Dashboard\ReviewController; 
+
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/', function () {
@@ -51,9 +53,23 @@ use App\Http\Controllers\Dashboard\BookingController;
         
         //Start Route Of Booking
         Route::resource('booking', BookingController::class);
+        Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirmBooking']);
+        Route::post('/bookings/{id}/reject', [BookingController::class, 'rejectBooking']);
+        Route::post('/bookings/{id}/delete', [BookingController::class, 'deleteBooking']);
         //End Route Of Booking
 
+        //Start Route Of Review
+        Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+        Route::delete('/destroy-reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+        Route::post('/update-review-status/{id}', [ReviewController::class, 'updateReviewStatus'])->name('update.review.status');
+
+        //End Route Of Review
+
     });
+        Route::post('sotre-reviews', [ReviewController::class, 'store'])->name('reviews.store');
+        Route::post('sotre-booking', [BookingController::class, 'store'])->name('booking.store');
+
+
 
 
 

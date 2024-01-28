@@ -13,7 +13,7 @@ class Menu extends Model
         'description',
     ];
 
-    public function item()
+    public function items()
     {
         return $this->hasMany(Item::class);
     }

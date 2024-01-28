@@ -16,6 +16,9 @@ class Booking extends Model
         'status',
         'customer_id',
     ];
+    protected $guarded = [
+        'booking_datetime'
+    ];
 
     public function customer()
     {

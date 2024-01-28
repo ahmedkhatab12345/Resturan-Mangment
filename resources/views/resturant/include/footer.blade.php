@@ -29,14 +29,29 @@
                         <h5 class="text-light fw-normal">Sunday</h5>
                         <p>10AM - 08PM</p>
                     </div>
+                    @if(Auth::guard('customers')->check())
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">ReviewUs</h4>
+                        <p>Please criticize with full credibility.</p>
+                        
+                            <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <form method="post" action="{{ route('reviews.store') }}">
+                            @csrf
+                                <textarea class="form-control border-primary w-100 py-3 ps-4 pe-5" name="review" placeholder="Review Us"></textarea>
+                                @error('review')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                                <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Send</button>
+                             </form>
+                            </div>
+                       
                     </div>
+                    @else
+                    <div role="alert" class="text-white col-lg-3 col-md-6">
+                        <p class="display-8">In order to Review Us, you must log in.</p>
+                        <a href="{{ route('login.form') }}" class="btn btn-primary py-2 px-4 animated slideInLeft">Login</a>
+                    </div>
+                    @endif
                 </div>
             </div>
             <div class="container">

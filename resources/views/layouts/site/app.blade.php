@@ -30,6 +30,10 @@
 
     <!-- Template Stylesheet -->
     <link href="{{url('/')}}/site/assets/css/style.css" rel="stylesheet">
+    <!-- في ملف العرض blade.blade.php -->
+<link href="{{ asset('path-to-select2/css/select2.min.css') }}" rel="stylesheet">
+<script src="{{ asset('path-to-select2/js/select2.min.js') }}"></script>
+
 </head>
 
 <body>

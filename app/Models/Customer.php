@@ -13,6 +13,7 @@ class Customer extends Model implements Authenticatable
         'name',
         'email',
         'password',
+        'photo',
     ];
     public function order()
     {

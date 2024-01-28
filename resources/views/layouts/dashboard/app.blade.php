@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Responsive Bootstrap 5 admin dashboard template & web App ui kit.">
 <meta name="keyword" content="LUNO, Bootstrap 5, ReactJs, Angular, Laravel, VueJs, ASP .Net, Admin Dashboard, Admin Theme, HRMS, Projects, Hospital Admin, CRM Admin, Events, Fitness, Music, Inventory, Job Portal">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="icon" href="{{url('/')}}/dashboard/assets/img/favicon.ico" type="image/x-icon"> 
 <title>:: LUNO :: Restaurant Dashboard</title>
 
@@ -15,6 +16,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
 
 <script src="{{url('/')}}/dashboard/assets/js/plugins.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="layout-1" data-luno="theme-blue">
 
@@ -1470,5 +1472,6 @@
     var chart = new ApexCharts(document.querySelector("#apex-RestaurentRating"), options);
     chart.render();
   </script>
+  @yield('scripts')
 </body>
 </html>

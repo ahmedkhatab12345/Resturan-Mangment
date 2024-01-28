@@ -20,6 +20,8 @@ return new class extends Migration
             $table->enum('status',['pending','processing','completed'])->default('pending');
             $table->date('delivery_date')->nullable();
             $table->text('notes')->nullable();
+            $table->integer('quantity');
+            $table->decimal('total_price', 10, 2);
             $table->foreignId('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
 

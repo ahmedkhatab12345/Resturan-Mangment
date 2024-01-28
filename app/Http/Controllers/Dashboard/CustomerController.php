@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\UploadTrait;
 
 class CustomerController extends Controller
 {
+    use UploadTrait;
     public function index()
     {
         $customers = Customer::all();
@@ -23,12 +25,15 @@ class CustomerController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:customers,email',
             'password' => 'required|string|min:6',
-        ]);
+            'photo' => 'image|mimes:jpeg,png,jpg,gif', 
 
+        ]);
+        $file_name=$this ->saveImage($request->photo,'images/site/customers');
         $customers = Customer::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'photo'=>$file_name,
         ]);
 
         //Auth::login($customers);

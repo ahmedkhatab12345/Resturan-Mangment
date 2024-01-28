@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\Menu;
 use App\Traits\UploadTrait;
 use File;
+use Illuminate\Support\Facades\Storage;
 class ItemController extends Controller
 {
     use UploadTrait;
@@ -85,7 +86,7 @@ class ItemController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
-                'menu_id ' => $request->menu_id,
+                'menu_id' => $request->menu_id,
             ]);
         
             return redirect()->route('items.index')->with('success', 'Item updated successfully');

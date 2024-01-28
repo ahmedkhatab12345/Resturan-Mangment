@@ -9,6 +9,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email_Address</th>
                 <th scope="col">Joined At</th>
+                <th scope="col">Photo</th>
                 <th scope="col">Process</th>
             </tr>
         </thead>
@@ -19,6 +20,7 @@
                     <td>{{ $customer->name }}</td>
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->created_at }}</td>
+                    <td><img  style="width: 90px; height: 90px;" src="{{asset('images/site/customers/'.$customer->photo)}}"></td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <form action="{{route('customers.destroy',$customer->id)}}" method="POST" style="display: inline-block;">

@@ -15,7 +15,8 @@
                                     <div class="col">
                                         <div class="card h-100 border-primary bg-light">
                                             <div class="card-header bg-primary text-white">
-                                                <h5 class="mb-0">Booking #{{ $booking->id }}</h5>
+                                                <h5 class="mb-0">Booking #{{ $booking->id }} _ {{ $booking->status }}</h5>
+
                                             </div>
                                             <div class="card-body">
                                                 <ul class="list-group list-group-flush">
@@ -27,10 +28,22 @@
                                             </div>
                                             <!-- Add your update form or any other actions here -->
                                             <div class="card-footer bg-light">
-                                                <button type="button" class="btn btn-success confirm-booking-btn" data-booking-id="{{ $booking->id }}">Confirm</button>
-                                                <button type="button" class="btn btn-warning reject-booking-btn" data-booking-id="{{ $booking->id }}">Reject</button>
-                                                <button type="button" class="btn btn-danger delete-booking-btn" data-booking-id="{{ $booking->id }}">Delete</button>
+                                            <button type="button" class="btn btn-success confirm-booking-btn" data-booking-id="{{ $booking->id }}">Confirm</button>
+                                            <button type="button" class="btn btn-warning reject-booking-btn" data-booking-id="{{ $booking->id }}">Reject</button>
+                                            <button type="button" class="btn btn-danger delete-booking-btn" data-booking-id="{{ $booking->id }}">Delete</button>
                                             </div>
+                                                <!-- Success Toast -->
+                                                <div class="position-absolute bottom-0 start-50 translate-middle-x p-3">
+                                                    <div id="success-toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="toast-header bg-success text-white">
+                                                            <strong class="me-auto">Success</strong>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="toast-body">
+                                                            Booking status updated successfully!
+                                                        </div>
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -43,51 +56,52 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+<script>
+    // تحديث حالة الحجز باستخدام Ajax
+    $('.confirm-booking-btn, .reject-booking-btn, .delete-booking-btn').on('click', function () {
+        var bookingId = $(this).data('booking-id');
+        var status = '';
 
-    <!-- إضافة السكريبت للتفاعل مع الأزرار -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.confirm-booking-btn, .reject-booking-btn, .delete-booking-btn').on('click', function () {
-                var bookingId = $(this).data('booking-id');
-                var actionType = '';
-
-                if ($(this).hasClass('confirm-booking-btn')) {
-                    actionType = 'confirm';
-                } else if ($(this).hasClass('reject-booking-btn')) {
-                    actionType = 'reject';
-                } else if ($(this).hasClass('delete-booking-btn')) {
-                    actionType = 'delete';
-                }
-
-                // Perform the action based on the button clicked
-                performBookingAction(bookingId, actionType);
-            });
-        });
-
-        function performBookingAction(bookingId, actionType) {
-            // Implement your logic here based on the action type
-            // You can use AJAX to send the action to the server and update the booking status
-            console.log('Booking ID:', bookingId);
-            console.log('Action Type:', actionType);
-
-            // Example AJAX request (you need to modify this based on your actual routes and logic)
-            $.ajax({
-                url: '/perform-booking-action/' + bookingId,
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    action_type: actionType
-                },
-                success: function (response) {
-                    // Handle success response
-                    console.log(response);
-                },
-                error: function (error) {
-                    // Handle error response
-                    console.log(error.responseJSON.message);
-                }
-            });
+        if ($(this).hasClass('confirm-booking-btn')) {
+            status = 'confirm';
+        } else if ($(this).hasClass('reject-booking-btn')) {
+            status = 'reject';
+        } else if ($(this).hasClass('delete-booking-btn')) {
+            status = 'delete';
         }
-    </script>
+        
+
+        updateBookingStatus(bookingId, status);
+    });
+
+    function updateBookingStatus(bookingId, status) {
+        // استخدام متغير global للحصول على قيمة رمز CSRF من الصفحة
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            method: 'POST',
+            url: '/bookings/' + bookingId + '/' + status,
+            dataType: 'json',
+            data: {
+                _token: csrfToken  // إضافة رمز CSRF إلى البيانات المرسلة
+            },
+            success: function (response) {
+                // قم بتحديث واجهة المستخدم أو إجراء أي إجراء آخر بناءً على الاستجابة
+                console.log(response.message);
+
+                // عرض رسالة النجاح باستخدام Bootstrap Toast
+                $('#success-toast').toast('show');
+
+                // إعادة تحميل الصفحة لتحديث قائمة الحجوزات بشكل ديناميكي
+                location.reload();
+            },
+            error: function (error) {
+                console.error('Error updating booking status: ', error);
+            }
+        });
+    }
+</script>
+
 @endsection
